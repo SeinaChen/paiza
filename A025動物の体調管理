@@ -1,0 +1,23 @@
+x = input()
+x_ls = x.split(" ")
+N = int(x_ls[0]) #ダイエット日数
+S = int(x_ls[1]) #初めの体重
+T = int(x_ls[2]) #超えない体重
+
+date_ls = [input() for i in range(N)]
+
+result = [(int(date_ls[i].split(" ")[0]),int(date_ls[i].split(" ")[1])) for i in range(N)]
+
+def AB(new,i):
+    return (new-result[i][0], new+result[i][1])
+
+array_ls = [[] for i in range(N)]
+
+array_ls[0] = AB(S,0)
+array_ls[1] = [AB(t,1) for t in AB(S,0) if t <= T]
+
+for i in range(1,N-1):
+    array_ls[i+1] = [AB(a,i+1) for t in array_ls[i] for a in t if a <= T]
+
+suitable = [a for t in array_ls[N-1] for a in t if a <= T ]
+print(len(suitable))
