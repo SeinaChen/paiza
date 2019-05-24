@@ -1,0 +1,14 @@
+import numpy as np
+x = input()
+ls = x.split(" ")
+
+k = int(ls[3])
+
+l = []
+for x in range(k):
+    for y in range(k):
+        for z in range(k):
+            result = (int(ls[0])**x)*(int(ls[1])**y)*(int(ls[2])**z)
+            l.append(result)
+l.sort()
+print(l[k-1])
